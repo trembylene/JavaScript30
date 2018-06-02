@@ -58,6 +58,31 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  function playSound(event) {
+    // console.log(event.keyCode); // Find name of key number in event object
+    // Create a constant that selects the audio element that corresponds to the key that is pressed
+    const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
+    // Create a constant that selects the div class that corresponds to pressed key
+    const key = document.querySelector(`.key[data-key="${event.keyCode}"]`);
+    // console.log(audio); // Check correct audio was selected
+    if(!audio) return; // Stop the function if there is no audio associated with key pressed
+    audio.currentTime = 0; // Rewinds audio to the start at each press
+    audio.play(); // Play audio
+    // console.log(key); // Check correct key is selected
+    key.classList.add('playing'); // add the class playing to the pressed key for 'animation'
+  };
+
+  function removeTransition(event) {
+    // console.log(event); // Check transition end events
+    if (event.propertyName !== 'transform') return; // skip them if it's not a transform
+    // console.log(event.propertyName); // Check what working with
+    this.classList.remove('playing'); // remove playing class. 'this' returns the div for that key, as 'this' is whatever the event listener has been called against
+  };
+
+  const keys = document.querySelectorAll('.key'); // select all keys
+  // add an event listener for each node for when the transition ends, then run a function that removes the playing class
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
 </script>
 
 
