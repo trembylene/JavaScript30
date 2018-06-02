@@ -13,7 +13,30 @@
       <div class="hand second-hand"></div>
     </div>
   </div>
+
 <script>
+  const secondHand = document.querySelector('.second-hand'); // select second-hand element
+  const minHand = document.querySelector('.min-hand'); // select min-hand element
+  const hourHand = document.querySelector('.hour-hand');
+
+  function setDate() {
+    const now = new Date(); // get current date
+
+    const seconds = now.getSeconds(); // get seconds from now
+    const secondsDegrees = ((seconds / 60) * 360) + 90; // converts seconds to base 100 then multiplies 360 to convert into degrees, plus 90 to offset original css hand transformation
+    secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+
+    const minutes = now.getMinutes(); // get minutes from now
+    const minutesDegrees = ((minutes / 60) * 360) + 90;
+    minHand.style.transform = `rotate(${minutesDegrees}deg)`;
+
+    const hours = now.getHours(); // get hours from now
+    const hoursDegrees = ((hours / 12) * 360) + 90;
+    hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+  };
+
+  setInterval(setDate, 1000); // runs function every second
 </script>
+
 </body>
 </html>
