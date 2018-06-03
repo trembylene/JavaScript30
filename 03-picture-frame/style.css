@@ -2,12 +2,14 @@
   --base: #ffc600;
   --spacing: 10px;
   --blur: 10px;
+  --greyscale: 0%;
+  --huerotate: 0deg;
 }
 
 img {
   padding: var(--spacing);
   background: var(--base);
-  filter: blur(var(--blur));
+  filter: blur(var(--blur)) grayscale(var(--greyscale)) hue-rotate(var(--huerotate));
 }
 
 .hl {
@@ -16,11 +18,11 @@ img {
 
 body {
   text-align: center;
-  background: #193549;
+  background: #264348;
   color: white;
-  font-family: 'helvetica neue', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-weight: 100;
-  font-size: 50px;
+  font-size: 36px;
 }
 
 .controls {

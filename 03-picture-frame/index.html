@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Scoped CSS Variables and JS</title>
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+  <h2><span class='hl'>JS</span> Photo Frame</h2>
 
   <div class="controls">
     <label for="spacing">Spacing:</label>
@@ -15,11 +16,18 @@
     <label for="blur">Blur:</label>
     <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
 
+    <label for="greyscale">Greyscale</label>
+    <input id="greyscale" type="range" name="greyscale" min="0" max="100" value="0" data-sizing="%">
+
+    <label for="huerotate">Hue</label>
+    <input id="huerotate" type="range" name="huerotate" min="0" max="360" value="0" data-sizing="deg">
+
     <label for="base">Base Color</label>
     <input id="base" type="color" name="base" value="#ffc600">
   </div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+  <img src="https://source.unsplash.com/UVyOfX3v0Ls/800x500">
+
 
   <script>
     const inputs = document.querySelectorAll('.controls input');
