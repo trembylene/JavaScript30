@@ -36,6 +36,27 @@
   </div>
 
   <script>
+  const panels = document.querySelectorAll('.panel');
+
+  function toggleOpen() {
+    this.classList.toggle('open');
+  }
+
+  function toggleActive(event) {
+    if(event.propertyName.includes('flex')) {
+    this.classList.toggle('open-active');
+    }
+  }
+
+  // toggleOpen doesn't have the () after it because otherwise it will only run on page load
+  panels.forEach(
+    panel => panel.addEventListener('click', toggleOpen)
+    );
+
+  panels.forEach(
+    panel => panel.addEventListener('transitionend', toggleActive)
+    );
+
   </script>
 
 
