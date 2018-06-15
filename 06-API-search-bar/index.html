@@ -14,8 +14,56 @@
       <li>or a state</li>
     </ul>
   </form>
+
+
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+// 1. array to hold cities information
+const cities = [];
+
+// 2. get cities info from the endpoint, convert the promise into json, then push that data into the cities array while flattening it (the 3 dots do this)
+fetch(endpoint)
+  .then(blob => blob.json())
+  .then(data => cities.push(...data))
+
+// 3. create function that takes user input and filters data in cities array to find a match anywhere in the city name or state name using RegExp()
+function findMatches(wordToMatch, cities) {
+  return cities.filter(place => {
+    const regex = new RegExp(wordToMatch, 'gi');
+    return place.city.match(regex) || place.state.match(regex);
+  });
+}
+
+// 4. create function that takes user input and logs this.value to the console
+// 7. run findMatches value and flter results into a matched array
+// 8. iterate over the matched data and transform it into html to insert into the suggestions. Also use join('') to get rid of commas
+// 9. Add highlight over matched regex for cities and states, and replace the li items with this updated const name
+function displayMatches() {
+  const matchedData = findMatches(this.value, cities);
+  const html = matchedData.map(place => {
+    const regex = new RegExp(this.value, 'gi');
+    const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+    const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+    return `
+      <li>
+        <span>${cityName}, ${stateName}</span>
+        <span>${place.population}</span>
+      </li>
+    `;
+  }).join('');
+  suggestions.innerHTML = html;
+}
+
+// 5. select the search input and suggestions html fields
+const searchInput = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+
+// 6. create event listeners for the search field to get user input as they type and after they click off
+searchInput.addEventListener('keyup', displayMatches);
+searchInput.addEventListener('change', displayMatches);
 </script>
+
+
   </body>
 </html>
